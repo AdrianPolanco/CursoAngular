@@ -4,14 +4,9 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-header',
-  template: `<header
-    class="flex flex-row {{ backgroundColor }} h-24 p-1 gap-5 items-center mb-5"
-  >
-    <div class="flex flex-col w-1/12 h-auto">
-      <img src="{{ iconPath }}" class=" h-2" />
-    </div>
-    <p class="text-base font-bold {{ textColor }}">{{ name }}</p>
-  </header>`,
+  /*NO es recomendado poner el HTML en el template, ya que hace el codigo menos mantenible, y al ser pasado
+  como string, si hay algun error no nos avisará en tiempo de compilacion*/ 
+  templateUrl: './header.component.html',
   styleUrls: ['../../styles.css'],
 })
 export class HeaderComponent {
