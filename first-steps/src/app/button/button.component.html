@@ -1,0 +1,9 @@
+<input (input)="buttonObject.changeInputValue($event)" />
+<p>{{ buttonObject.name }}</p>
+<button
+  class="p-1 font-medium border-solid border bg-red-500 text-white rounded-md hover:bg-white hover:text-red-500 hover:border hover:border-red-500"
+  [disabled]="buttonObject.isEnabled"
+  (click)="buttonObject.clickFunction()"
+>
+  {{ buttonObject.title }}
+</button>
