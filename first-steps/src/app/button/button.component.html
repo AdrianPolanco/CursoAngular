@@ -1,9 +1,23 @@
-<input (input)="buttonObject.changeInputValue($event)" />
+<!--Two Way Data Binding usando el ngModel de FormsModel, importado en app.module.ts y declarado en imports-->
+<!--<input [(ngModel)]="buttonObject.name" />-->
+<!--Resumen: Usamos {{ value }} para interpolar el valor que se nos esta pasando desde la clase del componente 
+a la plantilla HTML
+
+Usamos [property]="value", ej [disabled]="value" para vincular el valor de esa propiedad al valor especificado en la clase
+
+Usamos (event) = "action($event)", ej (click)="changeInputValue($event)" para vincular el evento a un metodo de la clase componente, el $event lo usamos para pasarle el
+evento al metodo como parametro, el cual debe tener definido un parametro tipo Event-->
+<input
+  (input)="buttonObject.changeInputValue($event)"
+  class="border border-red-500"
+/>
 <p>{{ buttonObject.name }}</p>
+<!--Puedo utilizar dos "condiciones" con TailwindCSS, por ejemplo: enabled:hover:border-red-500, es decir, el borde solo adquirira el color red-500 cuando le haga hover y el boton o elemento de turno este activado-->
 <button
-  class="p-1 font-medium border-solid border bg-red-500 text-white rounded-md hover:bg-white hover:text-red-500 hover:border hover:border-red-500"
+  class="p-1 font-medium border-solid border bg-red-500 text-white rounded-md enabled:hover:bg-white enabled:hover:text-red-500 enabled:hover:border-red-500 disabled:bg-gray-500 disabled:text-white"
   [disabled]="buttonObject.isEnabled"
   (click)="buttonObject.clickFunction()"
 >
-  {{ buttonObject.title }}
+  <!--Utilizando funcion dentro de la interpolacion-->
+  {{ buttonObject.renderValue() }}
 </button>

@@ -9,19 +9,22 @@ import IButton from './IButton';
 export class ButtonComponent {
   buttonObject: IButton = {
     name: 'Adrian',
-    inputValue: "",
+    inputValue: '',
     title: 'Disabled',
     isEnabled: false,
     clickFunction(): void {
       alert('You have clicked me');
-      
-      this.name = this.inputValue
+
+      this.name = this.inputValue;
       //this.isEnabled = !this.isEnabled;
     },
-    changeInputValue(e: Event): void{
+    changeInputValue(e: Event): void {
       const inputElement: HTMLInputElement = e.target as HTMLInputElement;
-      const value: string = inputElement.value
-      this.inputValue = value
-    }
+      const value: string = inputElement.value;
+      this.inputValue = value;
+    },
+    renderValue(): string {
+      return this.isEnabled ? 'Disabled' : 'Enabled';
+    },
   };
 }
