@@ -1,0 +1,11 @@
+@import url("../styles.css");
+
+.brand-name {
+  display: flex;
+  flex-direction: row;
+  gap: 1%;
+  color: var(--theme-color);
+  box-shadow: 0 8px 12px -15px black;
+  margin-bottom: 20px;
+  width: 100%;
+}
