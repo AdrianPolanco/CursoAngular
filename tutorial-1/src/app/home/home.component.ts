@@ -11,8 +11,14 @@ import { HousingService } from '../housing.service';
   template: `
     <section>
       <form>
-        <input type="text" placeholder="Filter by city" />
-        <button class="primary" type="button">Search</button>
+        <input type="text" placeholder="Filter by city" #filter />
+        <button
+          class="primary"
+          type="button"
+          (click)="filterResults(filter.value)"
+        >
+          Search
+        </button>
       </form>
     </section>
     <section class="results">
@@ -35,10 +41,9 @@ componente padre
   ahora el [housingLocation] se refiere a cada item de la lista de housingLocationList en vez del housingLocation del HousingLocationComponent
 -->
       <app-housing-location
-        *ngFor="let housingLocation of housingLocationList"
+        *ngFor="let housingLocation of filteredLocationList"
         [housingLocation]="housingLocation"
-      >
-      </app-housing-location>
+      ></app-housing-location>
     </section>
   `,
   styleUrls: ['./home.component.css'],
@@ -51,8 +56,25 @@ export class HomeComponent {
   de manera que cada vez que se utilice el inject(HousingService) se devolvera la misma instancia del HousingService */
   //Utilizamos el servicio HousingService como dependencias, el cual definimos en housing.service.ts
   housingService: HousingService = inject(HousingService);
+  filteredLocationList: HousingLocation[] = [];
 
   constructor() {
-    this.housingLocationList = this.housingService.getAllHousingLocations();
+    this.housingService
+      .getAllHousingLocations()
+      .then((housingLocationList: HousingLocation[]) => {
+        this.housingLocationList = housingLocationList;
+        this.filteredLocationList = housingLocationList;
+      });
+  }
+
+  filterResults(text: string): void {
+    if (!text) {
+      this.filteredLocationList = this.housingLocationList;
+    }
+
+    this.filteredLocationList = this.housingLocationList.filter(
+      (housingLocation) =>
+        housingLocation?.city.toLowerCase().includes(text.toLowerCase())
+    );
   }
 }
