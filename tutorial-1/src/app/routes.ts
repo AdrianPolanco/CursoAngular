@@ -11,7 +11,8 @@ const routeConfig: Routes = [
     title: 'Home page',
   },
   {
-    /* Creando ruta dinamica de acuerdo al id despues de details/ en la ruta */ path: 'details/:id',
+    /* Creando ruta dinamica de acuerdo al id despues de details/ en la ruta */
+    path: 'details/:id',
     component: DetailsComponent,
     title: 'Home details',
   },

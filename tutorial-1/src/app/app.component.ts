@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   template: `
     <main>
-      <!--Usando [routerLink]="['/']" para que, al pusar en el elemento <a> con esa directiva, te redirija a la vista del inicio-->
+      <!--Usando [routerLink]="['/']" para que, al pulsar en el elemento <a> con esa directiva, te redirija a la vista del inicio-->
       <a [routerLink]="['/']">
         <header class="brand-name">
           <img

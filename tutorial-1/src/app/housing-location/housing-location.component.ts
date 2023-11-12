@@ -6,7 +6,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-housing-location',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterOutlet],
+  imports: [CommonModule, RouterLink],
   template: `
     <section class="listing">
       <img
@@ -20,6 +20,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
       <p class="listing-location">
         {{ housingLocation.city }}, {{ housingLocation.state }}
       </p>
+      <!--Usar [routerLink]="['/ruta', hrefValue]" para ir a otro componente o vista que matchee con la ruta-->
       <a [routerLink]="['/details', housingLocation.id]">Learn More</a>
     </section>
   `,
