@@ -1,0 +1,7 @@
+<p>More heroes: </p>
+<ul *ngIf="heroes.length > 0; else AllHeroesDeleted">
+  <li *ngFor="let hero of heroes; track hero;">{{hero}}</li>
+</ul>
+<ng-template #AllHeroesDeleted>You have deleted all heroes</ng-template>
+
+<button (click)="removeLastHero()" class="btn btn-danger" *ngIf="heroes.length > 0">Remove hero</button>
