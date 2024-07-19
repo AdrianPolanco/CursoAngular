@@ -1,1 +1,14 @@
-<p>main-page works!</p>
+<main class="container">
+  <h1>Personajes de DBZ</h1>
+  <hr/>
+  <section class="row">
+    <div class="col">
+      <h4>Listado</h4>
+      <div class="row">
+        <app-dbz-list [characters]="characters"></app-dbz-list>
+        <app-dbz-add-character></app-dbz-add-character>
+      </div>
+
+    </div>
+  </section>
+</main>
