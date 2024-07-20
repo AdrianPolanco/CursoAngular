@@ -1,5 +1,10 @@
 <ul class="list-group">
-  @for (character of characters; track $index) {
-    <div class="list-group-item">{{ character.name }} - {{ character.power }}</div>
+  @for (character of characters; track $index; let first = $first; let last = $last) {
+    <div class="list-group-item d-flex justify-content-between" [class]="{'bg-primary':first, 'bg-secondary': last}">
+      <span>{{ character.name }} - {{ character.power }}</span>
+      @if(character.id){
+        <button class="btn btn-danger text-white rounded shadow-none" (click)="deleteCharacter(character.id)">X</button>
+      }
+    </div>
   }
 </ul>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { ListComponent } from './components/list/list.component';
 import { AddCharacterComponent } from './components/add-character/add-character.component';
+import { FormsModule } from '@angular/forms';
 
 
 //CommonModule es el Module que contiene las directivas de Angular como ngIf, ngFor, ngSwitch, etc.
@@ -15,7 +16,8 @@ import { AddCharacterComponent } from './components/add-character/add-character.
     AddCharacterComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   exports: [
     MainPageComponent
