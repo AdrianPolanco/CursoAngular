@@ -1,0 +1,24 @@
+<!--<ul class="d-flex gap-4">
+  @for(gif of gifs; track $index){
+    <li>
+      <article class="card h-100">
+        <img [src]="gif.url" class="card-img-top h-75" alt="...">
+        <div class="card-body bg-dark text-light h-25">
+          <h5 class="card-title">{{ gif.title }}</h5>
+        </div>
+      </article>
+    </li>
+  }
+</ul>-->
+<section class="row">
+  @for(gif of gifs; track $index){
+    <article class="col-md-3 col-sm-6">
+      <div class="card mb-2 text-center bg-dark">
+         <img [src]="gif.url" class="card-img-top" alt="...">
+        <div class="card-body text-white">
+          <p class="card-text">{{ gif.title }}</p>
+        </div>
+      </div>
+    </article>
+  }
+</section>
