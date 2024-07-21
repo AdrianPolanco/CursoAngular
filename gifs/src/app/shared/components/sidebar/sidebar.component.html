@@ -4,7 +4,7 @@
   <hr class="text-white"/>
   <div class="list-group list-reset gap-1">
     @for (gif of gifsHistory; track $index) {
-          <button class="list-group-item list-group-item-action rounded">{{ gif | titlecase}}</button>
+          <button class="list-group-item list-group-item-action rounded" (click)="searchTag(gif)">{{ gif | titlecase}}</button>
     }
   </div>
 </div>

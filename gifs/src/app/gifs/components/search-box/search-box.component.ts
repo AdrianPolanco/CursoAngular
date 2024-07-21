@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { GifsService } from '../../services/gifs.service';
+import { GifService } from '../../services/gifs.service';
 
 @Component({
   selector: 'gifs-search-box',
@@ -11,7 +11,7 @@ import { GifsService } from '../../services/gifs.service';
 })
 export class SearchBoxComponent {
 
-  constructor(private gifsService: GifsService) { }
+  constructor(private gifsService: GifService) { }
 
   //ViewChild sirve para tomar una referencia local de un elemento del DOM (una vez que se renderiza el componente)
   @ViewChild('search') search!: ElementRef<HTMLInputElement>;

@@ -6,6 +6,7 @@ import { GifsModule } from './gifs/gifs.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AppComponent } from './app.component';
     GifsModule,
     SharedModule
   ],
-  providers: [],
+  //Injectando el httpClient en el módulo principal
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -14,7 +14,7 @@
   @for(gif of gifs; track $index){
     <article class="col-md-3 col-sm-6">
       <div class="card mb-2 text-center bg-dark">
-         <img [src]="gif.url" class="card-img-top" alt="...">
+         <img [src]="gif.images.downsized_medium.url" class="card-img-top" [alt]="gif.title">
         <div class="card-body text-white">
           <p class="card-text">{{ gif.title }}</p>
         </div>
