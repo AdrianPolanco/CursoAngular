@@ -1,0 +1,47 @@
+<p-panel [showHeader]="true" class="p-1">
+  <h1>Pipes básicos</h1>
+  <p>Pipes incluidos en Angular - Usualmente en el CommonModule</p>
+</p-panel>
+<div class="grid p-5">
+  <div class="col-12 md:col-4">
+    <p-card header="Uppercase">
+      {{ name | uppercase }}
+    </p-card>
+  </div>
+  <div class="col-12 md:col-4">
+    <p-card header="Lowercase">
+      {{ name | lowercase }}
+    </p-card>
+  </div>
+  <div class="col-12 md:col-4">
+    <p-card header="Titlecase">
+      {{ name | titlecase }}
+    </p-card>
+  </div>
+
+    <div class="col-12 md:col-4">
+      <p-card header="Titlecase">
+        <ul>
+          <li>date: {{date}}</li>
+          <li>date | date: {{ date | date}}</li>
+          <li>date | date: 'short': {{ date | date: 'short'}}</li>
+          <li>date | date: 'shortDate': {{ date | date: 'shortDate'}}</li>
+          <li>date | date: 'shortTime': {{ date | date: 'shortTime'}}</li>
+          <li>date | date: 'medium': {{ date | date: 'medium'}}</li>
+          <li>date | date: 'MMMM': {{ date | date: 'MMMM'}}</li>
+          <li>date | date: 'mediumTime': {{ date | date: 'mediumTime'}}</li>
+          <li>date | date: 'long': {{ date | date: 'long'}}</li>
+          <li>date | date: 'MMMM dd': {{ date | date: 'MMMM dd'}}</li>
+          <li>date | date: 'MMMM dd YYYY': {{ date | date: 'MMMM dd YYYY'}}</li>
+          <li>date | date: 'longTime': {{ date | date: 'longTime'}}</li>
+        </ul>
+        <hr/>
+        <ul>
+          <li>date | date: 'long': 'GMT-4': {{date | date: 'long': 'GMT-4'}}</li>
+          <li>date | date: 'long': 'GMT-6': {{date | date: 'long': 'GMT-6'}}</li>
+          <!--Ajustando a local-->
+          <li>date | date: 'long': '': 'es-DO': {{date | date: 'long': '': 'fr-CA'}}</li>
+        </ul>
+      </p-card>
+    </div>
+</div>
