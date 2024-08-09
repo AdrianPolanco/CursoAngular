@@ -1,1 +1,62 @@
-<p>new-page works!</p>
+<h1>
+  Heroe
+  <small>Superman</small>
+</h1>
+
+<mat-divider class="mb-2" />
+
+<div class="grid">
+  <div class="col sm:col-6">
+    <mat-card>
+      <mat-card-content>
+        <div class="grid">
+          <mat-form-field class="col-12 sm:col-6">
+            <mat-label>Heroé</mat-label>
+            <input matInput placeholder="Nombre del héroe" required/>
+          </mat-form-field>
+          <mat-form-field class="col-12 sm:col-6">
+            <mat-label>Alter ego</mat-label>
+            <input matInput placeholder="Alter ego del héroe" required />
+          </mat-form-field>
+          <mat-form-field class="col-12 sm:col-6">
+            <mat-label>Primera aparición</mat-label>
+            <input matInput placeholder="Primera aparición del héroe" required />
+          </mat-form-field>
+          <mat-form-field class="col-12 sm:col-6">
+            <mat-label>Personaje</mat-label>
+            <input matInput placeholder="Personaje del héroe" required />
+          </mat-form-field>
+          <mat-form-field class="col-12">
+            <mat-label>Primera aparición</mat-label>
+            <input matInput placeholder="Primera aparición del héroe" required />
+          </mat-form-field>
+          <mat-form-field class="col-12">
+            <mat-label>Creador</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let publisher of publishers" [value]="publisher.id">{{publisher.desc}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="flex justify-content-between">
+            <button mat-flat-button color="warn">
+              <mat-icon>delete</mat-icon>
+              Eliminar
+            </button>
+            
+            <button mat-flat-button color="primary">
+              <mat-icon>save</mat-icon>
+              Guardar
+            </button>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="col sm:col-6">
+    <mat-card>
+      <img [src]="" [alt]="">
+    </mat-card>
+  </div>
+</div>
