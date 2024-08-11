@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Eliminar héroe</h2>
+<mat-dialog-content>
+  ¿Esta seguro que quiere eliminar a {{data.superhero}}? Esta acción no se puede deshacer.
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="onNoClick()">No, gracias.</button>
+  <button mat-button mat-dialog-close color="warn" (click)="onConfirm()">Eliminar</button>
+</mat-dialog-actions>

@@ -1,50 +1,51 @@
 <h1>
-  Heroe
-  <small>Superman</small>
+  {{(currentHero | formTitle)[0]}}
+  <small *ngIf="(currentHero | formTitle)[1] as heroName">{{heroName}}</small>
 </h1>
 
 <mat-divider class="mb-2" />
 
-<div class="grid">
+<form class="grid" [formGroup]="form">
   <div class="col sm:col-6">
     <mat-card>
       <mat-card-content>
         <div class="grid">
           <mat-form-field class="col-12 sm:col-6">
             <mat-label>Heroé</mat-label>
-            <input matInput placeholder="Nombre del héroe" required/>
+            <input matInput placeholder="Nombre del héroe" required formControlName="superhero"/>
           </mat-form-field>
           <mat-form-field class="col-12 sm:col-6">
             <mat-label>Alter ego</mat-label>
-            <input matInput placeholder="Alter ego del héroe" required />
-          </mat-form-field>
-          <mat-form-field class="col-12 sm:col-6">
-            <mat-label>Primera aparición</mat-label>
-            <input matInput placeholder="Primera aparición del héroe" required />
-          </mat-form-field>
-          <mat-form-field class="col-12 sm:col-6">
-            <mat-label>Personaje</mat-label>
-            <input matInput placeholder="Personaje del héroe" required />
+            <input matInput placeholder="Alter ego del héroe" required formControlName="alter_ego"/>
           </mat-form-field>
           <mat-form-field class="col-12">
             <mat-label>Primera aparición</mat-label>
-            <input matInput placeholder="Primera aparición del héroe" required />
+            <input matInput placeholder="Primera aparición del héroe" required formControlName="first_appearance"/>
+          </mat-form-field>
+          <mat-form-field class="col-12">
+            <mat-label>Personaje</mat-label>
+            <input matInput placeholder="Personaje del héroe" required formControlName="characters"/>
           </mat-form-field>
           <mat-form-field class="col-12">
             <mat-label>Creador</mat-label>
             <mat-select>
-              <mat-option *ngFor="let publisher of publishers" [value]="publisher.id">{{publisher.desc}}</mat-option>
+              <mat-option *ngFor="let publisher of publishers" [value]="publisher.id" formControlName="publisher">{{publisher.desc}}</mat-option>
             </mat-select>
+          </mat-form-field>
+          <mat-form-field class="col-12">
+            <mat-label>Alternative image</mat-label>
+            <input matInput placeholder="Personaje del héroe" formControlName="alt_img" />
           </mat-form-field>
         </div>
 
         <div class="flex justify-content-between">
-            <button mat-flat-button color="warn">
+            <button *ngIf="currentHero.id" mat-flat-button color="warn" (click)="onDeleteHero()">
               <mat-icon>delete</mat-icon>
               Eliminar
             </button>
-            
-            <button mat-flat-button color="primary">
+            <span *ngIf="!currentHero.id"></span>
+
+            <button mat-flat-button color="primary" (click)="onSubmit()">
               <mat-icon>save</mat-icon>
               Guardar
             </button>
@@ -56,7 +57,7 @@
 
   <div class="col sm:col-6">
     <mat-card>
-      <img [src]="" [alt]="">
+      <img [src]="currentHero | heroImage" [alt]="currentHero.superhero">
     </mat-card>
   </div>
-</div>
+</form>
