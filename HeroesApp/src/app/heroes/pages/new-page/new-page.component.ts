@@ -76,10 +76,11 @@ export class NewPageComponent implements OnInit {
 
     dialogRef.afterClosed()
       .pipe(
+        //Filtrando que el resultado sea true, si no, no se ejecuta el siguiente operador
         filter((result: boolean) => result),
         switchMap(() => this.heroesService.delete(this.currentHero.id)),
         filter((result: boolean) => result)
-    )
+    ) //Si se cumple todo lo anterior, se ejecuta el suscribe que redirige a la lista de heroes y muestra un snackbar
       .subscribe(
       () => {
         this.router.navigate(['/heroes']);

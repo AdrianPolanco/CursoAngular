@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../../auth/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-layout-page',
@@ -6,6 +8,8 @@ import { Component } from '@angular/core';
   styles: ``
 })
 export class LayoutPageComponent {
+
+  constructor(private authService: AuthService, private router: Router) {}
   sidebarItems = [
     {
       label: "Listado",
@@ -23,4 +27,9 @@ export class LayoutPageComponent {
       url: "./search"
     }
   ]
+
+  onLogout() {
+    this.authService.logout();
+    this.router.navigateByUrl('/auth/login');
+  }
 }
