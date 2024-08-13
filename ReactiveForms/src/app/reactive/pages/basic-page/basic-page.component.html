@@ -1,0 +1,91 @@
+<h2>Reactivos: Básicos</h2>
+<hr>
+
+<div class="row">
+  <div class="col">
+
+    <form [formGroup]="form" (ngSubmit)="onSave()" autocomplete="off">
+
+      <!-- Campo de producto -->
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Producto</label>
+        <div class="col-sm-9">
+
+          <input type="text" class="form-control" formControlName="name" placeholder="Nombre del producto">
+
+          <span *ngIf="isValidField('name')" class="form-text text-danger">
+              {{ getFieldError('name') }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Campo de producto -->
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Precio</label>
+        <div class="col-sm-9">
+          <input type="number" formControlName="price" class="form-control" placeholder="Precio del producto">
+          <span *ngIf="isValidField('price')" class="form-text text-danger">
+              {{ getFieldError('price') }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Campo de existencias -->
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Existencias</label>
+        <div class="col-sm-9">
+          <input type="number" formControlName="stock" class="form-control" placeholder="Existencias del producto">
+
+          <span *ngIf="isValidField('stock')" class="form-text text-danger">
+              {{ getFieldError('stock') }}
+          </span>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col">
+          <button type="submit" class="btn btn-primary float-end">
+            Guardar
+          </button>
+        </div>
+      </div>
+
+
+
+    </form>
+
+  </div>
+</div>
+
+
+
+
+<div class="row">
+  <div class="col">
+
+    <span>Valid</span>
+    <pre>{{ form.valid | json }}</pre>
+
+    <span>Pristine</span>
+    <pre>{{ form.pristine | json }}</pre>
+
+    <span>Touched</span>
+    <pre>{{ form.touched | json }}</pre>
+
+    <span>Value</span>
+    <pre>{{ form.value | json }}</pre>
+
+    <span>Precio</span>
+    <pre>{{ form.controls["price"].value | json }}</pre>
+
+    <span>Precio - Errores</span>
+    <pre>{{ form.controls["price"].errors | json }}</pre>
+
+    <span>Producto</span>
+    <pre>{{ form.controls["name"].value | json }}</pre>
+
+    <span>Producto - Errores</span>
+    <pre>{{ form.controls["name"].errors | json }}</pre>
+  </div>
+</div>
