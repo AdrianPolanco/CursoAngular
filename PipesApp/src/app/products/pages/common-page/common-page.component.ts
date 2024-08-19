@@ -49,5 +49,7 @@ export class CommonPageComponent {
     setTimeout(() => {
       resolve("Promise resolved");
     }, 4000);
+
+    
   });
 }
