@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { House, houses } from '../../interfaces/house.interface';
 
 @Component({
   selector: 'maps-properties-page',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styles: ``
 })
 export class PropertiesPageComponent {
-
+  houses: House[] = houses
 }
