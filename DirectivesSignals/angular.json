@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "NgMaps": {
+    "DirectivesSignals": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,8 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/ng-maps",
-            "baseHref": "/NgMaps/",
+            "outputPath": "dist/directives-signals",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -70,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "NgMaps:build:production"
+              "buildTarget": "DirectivesSignals:build:production"
             },
             "development": {
-              "buildTarget": "NgMaps:build:development"
+              "buildTarget": "DirectivesSignals:build:development"
             }
           },
           "defaultConfiguration": "development"
