@@ -1,0 +1,36 @@
+<article>
+  <div class="flex justify-end p-3">
+    <button (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content>
+    <section class="flex flex-wrap gap-1 justify-center">
+      <div class="w-full md:w-1/2 p-0">
+        <img [src]="photo.image" alt="Photo not loaded" class="h-96" />
+      </div>
+      <div class="w-full md:w-1/2 p-2">
+        <div class="flex flex-col">
+          <p class="text-xl mb-0">{{photo.title}}</p>
+          <p class="text-xs text-gray-400">
+            {{photo.created_at | date}} a las {{photo.created_at | date: "shortTime"}}
+          </p>
+        </div>
+        <div class="flex justify-center">
+          <p class="text-sm">{{photo.description}}</p>
+        </div>
+      </div>
+    </section>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button *ngIf="photo.favorite">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-button *ngIf="!photo.favorite">
+      <mat-icon>favorite_border</mat-icon>
+    </button>
+    <button mat-button>
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-dialog-actions>
+</article>

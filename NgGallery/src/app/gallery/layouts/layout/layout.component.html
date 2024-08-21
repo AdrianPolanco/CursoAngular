@@ -1,0 +1,32 @@
+<mat-sidenav-container fullscreen>
+
+  <!--Este es el toolbar en sí, por eso era que no se renderizaba nada ni se mostraba el menu-->
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="flex items-center">NgG<mat-icon>alternate_email</mat-icon>llery</span>
+  </mat-toolbar>
+
+  <!--Este es el sidenav que se abrira cuando el toggle este en true-->
+  <mat-sidenav #sidenav mode="push" [ngStyle]="{ width: '250px' }" color="primary">
+    <mat-toolbar>
+      <span>Menú</span>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <mat-nav-list>
+      <mat-list-item *ngFor="let item of sidebarItems" [routerLink]="item.url" (click)="sidenav.toggle()">
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        {{ item.label }}
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <div class="justify-center p-6">
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-container>

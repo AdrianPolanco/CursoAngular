@@ -1,0 +1,20 @@
+<mat-card appearance="outlined" class="h-auto" (click)="emitPhotoClickedEvent()">
+  <mat-card-header class="mb-1">
+    <div class="w-full">
+      <mat-card-title><p class="text-3xl">{{photo.title}}</p></mat-card-title>
+      <mat-card-subtitle><p class="text-gray-300 text-sm w-full flex justify-end">Publicado el {{photo.created_at | date}} a las {{photo.created_at | date : "shortTime"}}</p></mat-card-subtitle>
+    </div>
+  </mat-card-header>
+  <img mat-card-image [src]="photo.image" alt="Photo not loaded" class="h-96">
+  <!--<mat-card-content>
+    <p class="pt-2"> {{photo.description}}</p>
+  </mat-card-content>-->
+  <mat-card-actions>
+    @if(photo.favorite){
+    <button mat-button><mat-icon>favorite</mat-icon></button>
+    }@else{
+      <button mat-button><mat-icon>favorite_outline</mat-icon></button>
+    }
+    <button mat-button><mat-icon class="mat-18">delete</mat-icon></button>
+  </mat-card-actions>
+</mat-card>
