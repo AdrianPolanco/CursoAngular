@@ -9,6 +9,9 @@ import { MaterialModule } from '../material/material.module';
 import { PhotoCardComponent } from './components/photo-card/photo-card.component';
 import { FavoritesPageComponent } from './pages/favorites-page/favorites-page.component';
 import { DetailsComponent } from './components/details/details.component';
+import { FavoriteDirective } from './directives/favorite.directive';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormErrorDirective } from './directives/form-error.directive';
 
 
 @NgModule({
@@ -18,12 +21,15 @@ import { DetailsComponent } from './components/details/details.component';
     LayoutComponent,
     PhotoCardComponent,
     FavoritesPageComponent,
-    DetailsComponent
+    DetailsComponent,
+    FavoriteDirective,
+    FormErrorDirective
   ],
   imports: [
     CommonModule,
     GalleryRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class GalleryModule { }

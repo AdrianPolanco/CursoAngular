@@ -1,4 +1,4 @@
-import { Component, Input, output, Output} from '@angular/core';
+import { Component, EventEmitter, Input, output, Output} from '@angular/core';
 import { Photo } from '../../types/photo.type';
 
 @Component({
@@ -8,9 +8,15 @@ import { Photo } from '../../types/photo.type';
 })
 export class PhotoCardComponent {
   @Input() photo!: Photo;
+  @Output() onChangeFavoriteState: EventEmitter<Photo> = new EventEmitter<Photo>();
   onPhotoClicked = output<Photo>();
 
   emitPhotoClickedEvent() {
     this.onPhotoClicked.emit(this.photo);
+  }
+
+  toggleFavorite() {
+    this.photo.favorite = !this.photo.favorite;
+    this.onChangeFavoriteState.emit(this.photo);
   }
 }

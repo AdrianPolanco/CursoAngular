@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { LOCALE_ID } from '@angular/core';
-import { registerLocaleData } from '@angular/common';
+import { NgOptimizedImage, registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 
 
@@ -17,7 +17,8 @@ registerLocaleData(localeEs, 'es-ES');
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgOptimizedImage
   ],
   providers: [
     provideAnimationsAsync(),

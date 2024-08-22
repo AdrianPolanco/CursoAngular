@@ -12,14 +12,15 @@ export class LayoutComponent {
       url: './images',
     },
     {
-      label: 'Subir',
-      icon: 'upload',
-      url: './upload',
-    },
-    {
       label: 'Favoritos',
       icon: 'favorites',
       url: './favorites',
     },
+    {
+      label: 'Subir',
+      icon: 'upload',
+      url: './upload',
+    },
+
   ];
 }
