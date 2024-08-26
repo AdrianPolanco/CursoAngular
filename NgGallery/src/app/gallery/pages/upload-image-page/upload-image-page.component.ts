@@ -16,6 +16,9 @@ export class UploadImagePageComponent {
   });
 
   uploadImage() {
-
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
   }
 }

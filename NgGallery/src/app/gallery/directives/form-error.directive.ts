@@ -1,59 +1,105 @@
-import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
-import { FormGroup, ValidationErrors } from '@angular/forms';
+import { Directive, ElementRef, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { AbstractControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ErrorMessages } from '../types/enums/error-messages.enum';
+import { merge, Subscription } from 'rxjs';
 
 @Directive({
   selector: '[galleryFormError]',
 })
-export class FormErrorDirective implements OnChanges{
-  private _form?: FormGroup;
-  private _key?: string;
-  private _valid?: boolean;
+export class FormErrorDirective implements OnInit, OnChanges, OnDestroy {
+  @Input() form!: FormGroup;
+  @Input() fieldKey!: string;
+  @Input() isFileInput: boolean = false;
 
-  @Input() set form(form: FormGroup) {
-    this._form = form;
+  private subscription?: Subscription;
+
+  constructor(private elementRef: ElementRef) {}
+
+  ngOnInit() {
+    const control = this.form.get(this.fieldKey);
+    if (control) {
+      if (this.isFileInput) {
+        control.setValidators([Validators.required, this.validateFileType]);
+      }
+      this.subscription = merge(
+        control.valueChanges,
+        control.statusChanges
+      ).subscribe(() => {
+        this.setMessages();
+      });
+    }
+  }
+
+  ngOnChanges(): void {
     this.setMessages();
   }
 
-  @Input() set key(value: string) {
-    this._key = value;
-  }
-
-  constructor(private elementRef: ElementRef) { }
-
-  ngOnChanges(): void {
-
+  ngOnDestroy() {
+    this.subscription?.unsubscribe();
   }
 
   setMessages() {
-    if (!this._form || !this._key) return;
+    if (!this.form || !this.fieldKey) return;
 
-    const errors = this._form.controls[this._key].errors;
-    const errorKeys = Object.keys(errors!);
-    const message = this.getMessage(errorKeys, errors);
-    if (this._form.touched) {
+    const control = this.form.get(this.fieldKey);
+    if (!control) return;
+
+    if ((control.dirty || control.touched) && control.invalid) {
+      const errors = control.errors;
+      const message = this.getMessage(Object.keys(errors!), errors);
       this.elementRef.nativeElement.innerText = message;
-      this.elementRef.nativeElement.style.color = this._valid ? 'green' : 'red';
+      this.elementRef.nativeElement.style.color = 'red';
+    } else if (control.valid) {
+      this.elementRef.nativeElement.innerText = 'Este campo es válido';
+      this.elementRef.nativeElement.style.color = 'green';
+    } else {
+      this.elementRef.nativeElement.innerText = '';
     }
-
   }
 
-  private getMessage(errorKeys: string[], errors: ValidationErrors | null) {
-    return errorKeys.map((key) => {
+  private getMessage(
+    errorKeys: string[],
+    errors: ValidationErrors | null
+  ): string {
+    for (const key of errorKeys) {
       switch (key) {
         case 'required':
-          this._valid = false;
           return ErrorMessages.Required;
         case 'minlength':
-          this._valid = false;
-          return `${ErrorMessages.InvalidLength}. La cantidad mínima de caracteres permitidos es ${errors![key].requiredLength}. Actualmente tienes ${errors![key].actualLength}`;
+          return `${
+            ErrorMessages.InvalidLength
+          }. La cantidad mínima de caracteres permitidos es ${
+            errors![key].requiredLength
+          }. Actualmente tienes ${errors![key].actualLength}`;
         case 'maxlength':
-          this._valid = false;
-          return `${ErrorMessages.InvalidLength}. La cantidad máxima de caracteres permitidos es ${errors![key].requiredLength}. Actualmente tienes ${errors![key].actualLength}`;
+          return `${
+            ErrorMessages.InvalidLength
+          }. La cantidad máxima de caracteres permitidos es ${
+            errors![key].requiredLength
+          }. Actualmente tienes ${errors![key].actualLength}`;
+        case 'invalidImageFile':
+          return 'El archivo seleccionado no es una imagen válida';
         default:
-          this._valid = true;
-          return 'Este campo es válido';
+          return 'Error de validación';
       }
-    });
+    }
+    return '';
+  }
+
+  private validateFileType(
+    control: AbstractControl
+  ): ValidationErrors | null {
+    if (control.value) {
+      const file: string = control.value;
+      const fileArray = file.split('.');
+      const extension = fileArray[fileArray.length - 1];
+      if (file && extension) {
+        const allowedTypes = ['jpeg', 'png', 'gif', 'jpg'];
+        if (!allowedTypes.includes(extension)) {
+          return { invalidImageFile: true };
+        }
+      }
+    }
+    return null;
   }
 }
