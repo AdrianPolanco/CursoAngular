@@ -12,9 +12,9 @@
       formControlName="description"></textarea>
     </mat-form-field>
 
-    <div class="flex flex-col gap-1">
+    <div class="flex flex-col gap-1 p-5">
       <label>Imagen</label>
-      <input type="file" formControlName="image">
+      <input type="file" formControlName="image" (fileSelected)="onFileSelected($event)">
       <span galleryFormError [form]="form" fieldKey="image" [isFileInput]="true"></span>
     </div>
     <button mat-raised-button color="primary">Subir imagen</button>

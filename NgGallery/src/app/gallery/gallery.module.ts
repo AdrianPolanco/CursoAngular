@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 
 import { GalleryRoutingModule } from './gallery-routing.module';
 import { UploadImagePageComponent } from './pages/upload-image-page/upload-image-page.component';
@@ -9,10 +9,9 @@ import { MaterialModule } from '../material/material.module';
 import { PhotoCardComponent } from './components/photo-card/photo-card.component';
 import { FavoritesPageComponent } from './pages/favorites-page/favorites-page.component';
 import { DetailsComponent } from './components/details/details.component';
-import { FavoriteDirective } from './directives/favorite.directive';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormErrorDirective } from './directives/form-error.directive';
-
+import { FileSelectedDirective } from './directives/file-selected.directive';
 
 @NgModule({
   declarations: [
@@ -22,14 +21,15 @@ import { FormErrorDirective } from './directives/form-error.directive';
     PhotoCardComponent,
     FavoritesPageComponent,
     DetailsComponent,
-    FavoriteDirective,
-    FormErrorDirective
+    FormErrorDirective,
+    FileSelectedDirective,
   ],
   imports: [
     CommonModule,
     GalleryRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    NgOptimizedImage,
+  ],
 })
-export class GalleryModule { }
+export class GalleryModule {}

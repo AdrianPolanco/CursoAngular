@@ -5,7 +5,9 @@
       <mat-card-subtitle><p class="text-gray-300 text-sm w-full flex justify-end">Publicado el {{photo.created_at | date}} a las {{photo.created_at | date : "shortTime"}}</p></mat-card-subtitle>
     </div>
   </mat-card-header>
-  <img mat-card-image [src]="photo.image" alt="Photo not loaded" class="h-96" (click)="emitPhotoClickedEvent()">
+  <div class="image-container">
+    <img mat-card-image [src]="photo.image" alt="Photo not loaded" (click)="emitPhotoClickedEvent()">
+  </div>
   <mat-card-actions>
 
     <button mat-button (click)="toggleFavorite()">
@@ -14,7 +16,6 @@
     }@else{
       <mat-icon>favorite_outline</mat-icon>
     }
-     <!--  <mat-icon isFavorite [photo]="photo"></mat-icon>-->
     </button>
     <button mat-button><mat-icon class="mat-18">delete</mat-icon></button>
   </mat-card-actions>
