@@ -1,3 +1,4 @@
+<h1 class="text-2xl font-bold text-center">Galería</h1>
 <section class="grid grid-cols-1 md:grid-cols-3 gap-3 justify-center">
-  <gallery-photo-card *ngFor="let photo of photos" [photo]="photo" (onPhotoClicked)="openDialog($event)" (onChangeFavoriteState)="onChangeFavorite($event)"/>
+  <gallery-photo-card *ngFor="let photo of photos" [photo]="photo" (onChangeFavoriteState)="onChangeFavorite($event)" (onPhotoDeleted)="deletePhoto($event)"/>
 </section>

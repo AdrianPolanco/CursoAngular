@@ -30,7 +30,7 @@ export class StorageService {
     const photos = await this.get();
     const image = await this.fileToDataUrl(imageFile);
     const photo: Photo = {
-      id: Guid.create(),
+      id: photos.length + 1,
       title,
       description,
       image,
@@ -43,15 +43,12 @@ export class StorageService {
     return photo;
   }
 
-  async updateFavoriteStatus(id: Guid): Promise<Photo[]> {
+  async updateFavoriteStatus(id: number): Promise<Photo[]> {
     let photos = await this.get();
-      if (!Guid.isGuid(id.toString())) {
-        console.error('El ID proporcionado no es un GUID válido:', id);
-        return photos; // Retorna las fotos originales si el ID no es válido
-      }
+
     photos = photos.map((p) => {
 
-      if (p.id.toString() === id.toString()) {
+      if (p.id === id) {
         p.favorite = !p.favorite;
       }
       return p;
@@ -60,9 +57,9 @@ export class StorageService {
     return photos;
   }
 
-  async delete(photo: Photo): Promise<Photo[]> {
+  async delete(id: number): Promise<Photo[]> {
     let photos = await this.get();
-    photos = photos.filter((p) => p.id !== photo.id);
+    photos = photos.filter((p) => p.id !== id);
     this.savePhoto(photos);
     return photos;
   }

@@ -1,0 +1,21 @@
+<article>
+  <div class="flex justify-end p-3">
+    <button (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <h1 mat-dialog-title>Eliminar foto</h1>
+  <mat-dialog-content>
+    <section class="flex flex-wrap gap-1 justify-center">
+      <p>¿Estas seguro/a de que quieres borrar la foto {{photo.title}}?</p>
+    </section>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="photo">
+      Sí
+    </button>
+    <button mat-button cdkFocusInitial (click)="closeDialog()">
+      No
+    </button>
+  </mat-dialog-actions>
+</article>

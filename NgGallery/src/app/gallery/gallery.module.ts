@@ -12,6 +12,7 @@ import { DetailsComponent } from './components/details/details.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormErrorDirective } from './directives/form-error.directive';
 import { FileSelectedDirective } from './directives/file-selected.directive';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FileSelectedDirective } from './directives/file-selected.directive';
     DetailsComponent,
     FormErrorDirective,
     FileSelectedDirective,
+    DeleteDialogComponent,
   ],
   imports: [
     CommonModule,

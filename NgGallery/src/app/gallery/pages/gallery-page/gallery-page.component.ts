@@ -1,8 +1,9 @@
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { Component, inject, Input, OnInit} from '@angular/core';
 import { Photo } from '../../types/photo.type';
 import { MatDialog } from '@angular/material/dialog';
-import { DetailsComponent } from '../../components/details/details.component';
 import { StorageService } from '../../services/storage.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'gallery-page',
@@ -11,22 +12,29 @@ import { StorageService } from '../../services/storage.service';
 })
 export class GalleryPageComponent implements OnInit {
   @Input({ required: false }) photos?: Photo[];
-  @Output() onChangeFavoriteState: EventEmitter<Photo> =
-    new EventEmitter<Photo>();
   dialog = inject(MatDialog);
+  snackBar = inject(MatSnackBar);
 
-  constructor(private storageService: StorageService) {}
+  constructor(private storageService: StorageService, private router: Router) {}
   async ngOnInit() {
     if (!this.photos) this.photos = await this.storageService.get();
   }
 
-  openDialog(photo: Photo) {
-    const dialogRef = this.dialog.open(DetailsComponent, {
-      data: photo,
-    });
-  }
 
   async onChangeFavorite(photo: Photo) {
     await this.storageService.updateFavoriteStatus(photo.id);
+    if (!photo.favorite) return;
+    const snackBarRef = this.snackBar.open('Imagen agregada a favoritos', 'Ir a favoritos', { duration: 5000 })
+    snackBarRef.onAction().subscribe(() => this.router.navigate(['/gallery/favorites']))
+  }
+
+  async deletePhoto(id: number) {
+    await this.storageService.delete(id);
+    await this.refreshPhotos();
+    this.snackBar.open('Imagen eliminada correctamente', '', {duration: 5000})
+  }
+
+  async refreshPhotos() {
+    this.photos = await this.storageService.get();
   }
 }
