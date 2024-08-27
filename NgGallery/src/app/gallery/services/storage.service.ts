@@ -15,7 +15,7 @@ export class StorageService {
     let photos = (photosJson ? JSON.parse(photosJson) : []) as Photo[];
     const proccessPhotos = photos.map(async(photo: Photo) => ({
       ...photo,
-      image: await this.getBlobUrlFromBase64(photo.image),
+      image: await this.getBlobUrlFromBase64(photo.image)
     }));
 
     photos = await Promise.all(proccessPhotos);
@@ -41,6 +41,23 @@ export class StorageService {
     photos.push(photo);
     this.savePhoto(photos);
     return photo;
+  }
+
+  async updateFavoriteStatus(id: Guid): Promise<Photo[]> {
+    let photos = await this.get();
+      if (!Guid.isGuid(id.toString())) {
+        console.error('El ID proporcionado no es un GUID válido:', id);
+        return photos; // Retorna las fotos originales si el ID no es válido
+      }
+    photos = photos.map((p) => {
+
+      if (p.id.toString() === id.toString()) {
+        p.favorite = !p.favorite;
+      }
+      return p;
+    });
+    this.savePhoto(photos);
+    return photos;
   }
 
   async delete(photo: Photo): Promise<Photo[]> {

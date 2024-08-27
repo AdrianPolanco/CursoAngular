@@ -1,7 +1,5 @@
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { Photo } from '../../types/photo.type';
-import { Guid } from 'guid-typescript';
-import { photos } from '../../data/photos.data';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailsComponent } from '../../components/details/details.component';
 import { StorageService } from '../../services/storage.service';
@@ -12,23 +10,23 @@ import { StorageService } from '../../services/storage.service';
   styles: ``,
 })
 export class GalleryPageComponent implements OnInit {
-
-  photos: Photo[] = photos;
-  @Output() onChangeFavoriteState: EventEmitter<Photo> = new EventEmitter();
+  @Input({ required: false }) photos?: Photo[];
+  @Output() onChangeFavoriteState: EventEmitter<Photo> =
+    new EventEmitter<Photo>();
   dialog = inject(MatDialog);
 
-  constructor(private storageService: StorageService) { }
+  constructor(private storageService: StorageService) {}
   async ngOnInit() {
-    this.photos = await this.storageService.get();
+    if (!this.photos) this.photos = await this.storageService.get();
   }
 
   openDialog(photo: Photo) {
     const dialogRef = this.dialog.open(DetailsComponent, {
-      data: photo
-    })
+      data: photo,
+    });
   }
 
-  onChangeFavorite(photo: Photo) {
-    this.onChangeFavoriteState.emit(photo);
+  async onChangeFavorite(photo: Photo) {
+    await this.storageService.updateFavoriteStatus(photo.id);
   }
 }

@@ -4,11 +4,12 @@ import { Photo } from '../../types/photo.type';
 @Component({
   selector: 'gallery-photo-card',
   templateUrl: './photo-card.component.html',
-  styles: ``
+  styles: ``,
 })
 export class PhotoCardComponent {
   @Input() photo!: Photo;
-  @Output() onChangeFavoriteState: EventEmitter<Photo> = new EventEmitter<Photo>();
+  @Output() onChangeFavoriteState: EventEmitter<Photo> =
+    new EventEmitter<Photo>();
   onPhotoClicked = output<Photo>();
 
   emitPhotoClickedEvent() {

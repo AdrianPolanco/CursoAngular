@@ -1,22 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Photo } from '../../types/photo.type';
-import { photos } from '../../data/photos.data';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
-  selector: 'app-favorites-page',
+  selector: 'gallery-favorites-page',
   templateUrl: './favorites-page.component.html',
-  styles: ``
+  styles: ``,
 })
-export class FavoritesPageComponent {
+export class FavoritesPageComponent implements OnInit {
+  constructor(private storageService: StorageService) {}
 
-  photos: Photo[] = photos.filter(photo => photo.favorite);
+  photos?: Photo[];
 
-  onChangeFavoriteState(photo: Photo) {
-    if (photo.favorite) {
-      this.photos.push(photo);
-      return;
-    }
+  async ngOnInit() {
+    this.photos = await this.storageService.get();
+    this.photos = this.photos.filter((photo) => photo.favorite);
+  }
 
-    this.photos = this.photos.filter(p => p.id !== photo.id);
+  async onChangeFavoriteState(photo: Photo) {
+    console.log('Event received in GalleryPageComponent:', photo);
+    //this.photos = await this.storageService.updateFavoriteStatus(photo.id);
   }
 }
