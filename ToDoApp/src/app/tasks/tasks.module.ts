@@ -6,6 +6,8 @@ import { TasksMainPageComponent } from './pages/tasks-main-page/tasks-main-page.
 import { TasksAboutPageComponent } from './pages/tasks-about-page/tasks-about-page.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { TasksLayoutComponent } from './layouts/tasks-layout/tasks-layout.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ControlAlertDirective } from './directives/control-alert.directive';
 
 
 
@@ -15,10 +17,12 @@ import { TasksLayoutComponent } from './layouts/tasks-layout/tasks-layout.compon
     TasksMainPageComponent,
     TasksAboutPageComponent,
     TasksLayoutComponent,
-    FooterComponent
+    FooterComponent,
+    ControlAlertDirective
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     UiModule
   ]
 })

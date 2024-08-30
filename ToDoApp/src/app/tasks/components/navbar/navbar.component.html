@@ -6,11 +6,51 @@
     </nav>
   </nav>
   <nav>
-      <ul class="flex gap-4">
-        <li *ngFor="let item of items" class="flex gap-2" routerLinkActive="text-primary" [routerLinkActiveOptions]="{exact: true}">
-          <i [class]="item.icon" class="text-xl"></i>
-          <a [routerLink]="item.routerLink">{{item.label}}</a>
-        </li>
+      <ul class="flex gap-24">
+        <nav>
+            <li>
+              <p-button (onClick)="toggleForm()" icon="pi pi-plus-circle" size="large" ></p-button>
+            </li>
+        </nav>
+        <nav class="flex gap-4">
+          <li *ngFor="let item of items" class="flex gap-2" routerLinkActive="text-primary" [routerLinkActiveOptions]="{exact: true}">
+            <i [class]="item.icon" class="text-xl"></i>
+            <a [routerLink]="item.routerLink">{{item.label}}</a>
+          </li>
+        </nav>
       </ul>
   </nav>
 </header>
+
+
+<p-dialog header="+ Nueva tarea" [modal]="true" [(visible)]="isFormVisible" [style]="{ width: '25rem' }">
+  <span class="p-text-secondary block mb-5">Añade una nueva tarea</span>
+  <div class="flex flex-col align-items-center gap-3 mb-3">
+    <label for="title" class="font-semibold w-6rem">Título</label>
+    <input pInputText id="title" class="flex-auto border" autocomplete="off" type="text" aria-describedby="title-help" />
+    <small id="title-help">
+      Introduce el título de la tarea. Ej: Comprar pan
+    </small>
+  </div>
+  <div class="flex flex-col align-items-center gap-3 mb-5">
+    <label for="description" class="font-semibold w-6rem">Descripcion</label>
+    <textarea pInputTextarea id="description" class="flex-auto border" autocomplete="off" aria-describedby="description-help"></textarea>
+    <small id="description-help">
+      Introduce más detalles acerca de la tarea. Ej: Debo ir a comprar pan al supermercado de la esquina
+    </small>
+  </div>
+  <div class="flex flex-col items-center gap-3 mb-5">
+    <label for="time" class="font-bold block mb-2">Fecha: </label>
+    <div class="inline-block p-2"> <!-- Nuevo div contenedor -->
+      <p-calendar inputId="time" [showTime]="true" [hourFormat]="'24'" class="border rounded p-1"
+        aria-describedby="time-help" />
+    </div>
+    <small id="time-help">
+      Introduce la fecha y hora en la que deseas realizar la tarea.
+    </small>
+  </div>
+  <div class="flex justify-between gap-2">
+    <p-button class="p-2 rounded" label="Cancelar" severity="secondary" (onClick)="toggleForm()"/>
+    <p-button class="bg-primary text-white p-2 rounded" label="Guardar"  (onClick)="toggleForm()" icon="pi pi-bookmark"/>
+  </div>
+</p-dialog>

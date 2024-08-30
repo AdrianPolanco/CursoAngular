@@ -1,11 +1,18 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
+import { validateDate } from '../../validators/date.validator';
 
 @Component({
   selector: 'tasks-navbar',
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
+
+  constructor(private fb: FormBuilder) {
+
+  }
+  isFormVisible = false;
   items: MenuItem[] = [
     {
       label: 'Tasks',
@@ -20,4 +27,25 @@ export class NavbarComponent {
       shortcut: 'Ctrl+A',
     },
   ];
+
+  form: FormGroup = this.fb.group({
+    title: ['', [Validators.required, Validators.minLength(10)]],
+    description: ['', []],
+    dueDate: ['', [Validators.required, validateDate()]],
+  })
+
+  toggleForm(): void {
+    this.isFormVisible = !this.isFormVisible;
+  }
+
+  addDescriptionValidator(): void {
+    const control = this.form.get('description');
+
+    if (!control?.value) {
+      control?.clearValidators();
+      return;
+    }
+    control.setValidators([Validators.minLength(10)]);
+    control.updateValueAndValidity();
+  }
 }
