@@ -1,0 +1,16 @@
+<header class="flex justify-between items-center p-5">
+  <nav>
+    <nav class="flex items-center gap-2 text-primary">
+      <i class="pi pi-check-circle"></i>
+      <span>TaskFlow</span>
+    </nav>
+  </nav>
+  <nav>
+      <ul class="flex gap-4">
+        <li *ngFor="let item of items" class="flex gap-2" routerLinkActive="text-primary" [routerLinkActiveOptions]="{exact: true}">
+          <i [class]="item.icon" class="text-xl"></i>
+          <a [routerLink]="item.routerLink">{{item.label}}</a>
+        </li>
+      </ul>
+  </nav>
+</header>
