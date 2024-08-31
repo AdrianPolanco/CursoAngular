@@ -1,17 +1,27 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MenuItem } from 'primeng/api';
 import { validateDate } from '../../validators/date.validator';
 import { Subscription } from 'rxjs';
-import { StorageService } from '../../services/storage.service';
 import { Task, TaskStatus } from '../../types/task.type';
-import {v4 as uuid} from 'uuid'
+import { StorageService } from '../../services/storage.service';
+import { v4 as uuid } from 'uuid';
 
 @Component({
-  selector: 'tasks-navbar',
-  templateUrl: './navbar.component.html',
+  selector: 'tasks-form',
+  templateUrl: './form.component.html',
+  styles: ``,
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class FormComponent implements OnInit, OnDestroy {
+  private _task?: Task;
+  @Input() mode: 'create' | 'edit' = 'create';
+  @Input({ required: false }) set task(value: Task) {
+    if (this.mode !== 'edit') return;
+    this._task = value;
+    if (this._task) this.form.patchValue(this._task);
+  }
+
+  isFormVisible = false;
+
   minDate: Date = new Date();
   maxDate: Date = new Date(this.minDate);
   descriptionSubscription?: Subscription;
@@ -20,22 +30,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.maxDate.setFullYear(this.minDate.getFullYear() + 1);
   }
 
-  isFormVisible = false;
-  items: MenuItem[] = [
-    {
-      label: 'Tasks',
-      icon: 'pi pi-list-check',
-      routerLink: '/',
-      shortcut: 'Ctrl+T',
-    },
-    {
-      label: 'About',
-      icon: 'pi pi-info-circle',
-      routerLink: '/about',
-      shortcut: 'Ctrl+A',
-    },
-  ];
-
   form: FormGroup = this.fb.group({
     title: ['', [Validators.required, Validators.minLength(10)]],
     description: ['', []],
@@ -43,9 +37,22 @@ export class NavbarComponent implements OnInit, OnDestroy {
   });
 
   ngOnInit(): void {
+    if (this.mode === 'edit') {
+      if (!this._task)
+        throw new Error('Una tarea es requerida para el modo de edición');
+      this.form.addControl(
+        'id',
+        this.fb.control(this._task.id, [Validators.required])
+      );
+      this.form.addControl(
+        'status',
+        this.fb.control(this._task.status, [Validators.required])
+      );
+    }
+
     const control = this.form.get('description');
     this.descriptionSubscription = control?.valueChanges.subscribe(() => {
-      if(control.value !== "")this.addDescriptionValidator();
+      if (control.value !== '') this.addDescriptionValidator();
     });
   }
 
@@ -58,7 +65,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     // Si el campo está vacío, se elimina el validador
     if (!control?.value) {
-      if(!control?.hasValidator(Validators.minLength(10))) return;
+      if (!control?.hasValidator(Validators.minLength(10))) return;
       control?.clearValidators();
       control.updateValueAndValidity({ onlySelf: true, emitEvent: false });
       return;
@@ -73,9 +80,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
-    };
+    }
 
-    const formValue = this.form.value
+    const formValue = this.form.value;
     const task: Task = {
       id: uuid(),
       title: formValue.title as string,

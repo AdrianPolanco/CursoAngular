@@ -8,6 +8,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { TasksLayoutComponent } from './layouts/tasks-layout/tasks-layout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ControlAlertDirective } from './directives/control-alert.directive';
+import { FormComponent } from './components/form/form.component';
 
 
 
@@ -18,7 +19,8 @@ import { ControlAlertDirective } from './directives/control-alert.directive';
     TasksAboutPageComponent,
     TasksLayoutComponent,
     FooterComponent,
-    ControlAlertDirective
+    ControlAlertDirective,
+    FormComponent
   ],
   imports: [
     CommonModule,
