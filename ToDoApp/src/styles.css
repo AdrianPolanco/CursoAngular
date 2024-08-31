@@ -26,3 +26,9 @@
 tasks-footer {
   flex-shrink: 0;
 }
+
+p-calendar {
+  border: 1px solid;
+  border-radius: 0.375rem;
+  padding: 0.25rem;
+}

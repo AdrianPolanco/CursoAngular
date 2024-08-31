@@ -8,10 +8,13 @@ import { validateDate } from '../../validators/date.validator';
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
+  minDate: Date = new Date();
+  maxDate: Date = new Date(this.minDate);
 
   constructor(private fb: FormBuilder) {
-
+    this.maxDate.setFullYear(this.minDate.getFullYear() + 1);
   }
+
   isFormVisible = false;
   items: MenuItem[] = [
     {
@@ -32,7 +35,7 @@ export class NavbarComponent {
     title: ['', [Validators.required, Validators.minLength(10)]],
     description: ['', []],
     dueDate: ['', [Validators.required, validateDate()]],
-  })
+  });
 
   toggleForm(): void {
     this.isFormVisible = !this.isFormVisible;
