@@ -1,0 +1,39 @@
+<p-table [value]="tasks" responsiveLayout="stack" [breakpoint]="'960px'" [tableStyle]="{'min-width': '50rem'}">
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th>Título</th>
+      <th>Descripción</th>
+      <th>Status</th>
+      <th pSortableColumn="dueDate">Vencimiento <p-sortIcon field="dueDate"/></th>
+      <th pSortableColumn="createdAt">Creación  <p-sortIcon field="createdAt"/></th>
+      <th>Actualización</th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-task let-columns="columns">
+    <tr>
+      <td>
+        <span class="p-column-title">Título</span>{{task.title}}
+      </td>
+      <td ellipsis [content]="task.description">
+        <span class="p-column-title">Descripción</span>{{task.description}}
+      </td>
+      <td>
+        <p-tag [value]="task.status | statusName" [severity]="getStatusColor(task.status)"/>
+      </td>
+      <td>
+        <span class="p-column-title">Vencimiento</span>{{task.dueDate | date: 'dd/MM/yyyy HH:mm'}}
+      </td>
+      <td>
+        <span class="p-column-title">Vencimiento</span>{{task.createdAt | date: 'dd/MM/yyyy HH:mm'}}
+      </td>
+      <td>
+        <span class="p-column-title">Vencimiento</span>{{(task.updatedAt? task.updatedAt : task.createdAt) | date: 'dd/MM/yyyy HH:mm'}}
+      </td>
+      <td>
+        <tasks-form [task]="task" mode="edit" icon="pi pi-pencil" size="small" />
+        <button pButton icon="pi pi-trash" class="p-button-rounded text-red-800"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

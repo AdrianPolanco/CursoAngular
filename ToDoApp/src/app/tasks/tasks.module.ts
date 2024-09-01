@@ -9,6 +9,11 @@ import { TasksLayoutComponent } from './layouts/tasks-layout/tasks-layout.compon
 import { ReactiveFormsModule } from '@angular/forms';
 import { ControlAlertDirective } from './directives/control-alert.directive';
 import { FormComponent } from './components/form/form.component';
+import { TableComponent } from './components/table/table.component';
+import { StatusNamePipe } from './pipes/status-name.pipe';
+import { EllipsisDirective } from './directives/ellipsis.directive';
+import { DescriptionDetailsComponent } from './components/description-details/description-details.component';
+import { DialogService } from 'primeng/dynamicdialog';
 
 
 
@@ -20,12 +25,16 @@ import { FormComponent } from './components/form/form.component';
     TasksLayoutComponent,
     FooterComponent,
     ControlAlertDirective,
-    FormComponent
+    FormComponent,
+    TableComponent,
+    StatusNamePipe,
+    EllipsisDirective,
+    DescriptionDetailsComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    UiModule
+    UiModule,
   ]
 })
 export class TasksModule { }

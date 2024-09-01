@@ -17,8 +17,11 @@ export class FormComponent implements OnInit, OnDestroy {
   @Input({ required: false }) set task(value: Task) {
     if (this.mode !== 'edit') return;
     this._task = value;
+    this._task.dueDate = new Date(this._task.dueDate);
     if (this._task) this.form.patchValue(this._task);
   }
+  @Input() icon: 'pi pi-plus-circle' | 'pi pi-pencil' = 'pi pi-plus-circle';
+  @Input() size: 'small' | 'large' = 'large';
 
   isFormVisible = false;
 
@@ -76,11 +79,16 @@ export class FormComponent implements OnInit, OnDestroy {
     control.updateValueAndValidity({ onlySelf: true, emitEvent: false });
   }
 
-  createTask(): void {
+  submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
+    if (this.mode === 'create') this.createTask();
+    else this.editTask();
+  }
+
+  private createTask(): void {
 
     const formValue = this.form.value;
     const task: Task = {
@@ -88,10 +96,26 @@ export class FormComponent implements OnInit, OnDestroy {
       title: formValue.title as string,
       description: formValue.description as string,
       dueDate: formValue.dueDate as Date,
-      status: TaskStatus.IN_PROGRESS,
+      status: TaskStatus.PENDING,
       createdAt: new Date(),
     };
     this.storageService.save(task);
+    this.form.reset();
+    this.toggleForm();
+  }
+
+  private editTask(): void {
+    const formValue = this.form.value;
+    const task: Task = {
+      id: formValue.id,
+      title: formValue.title as string,
+      description: formValue.description as string,
+      dueDate: formValue.dueDate as Date,
+      status: formValue.status as TaskStatus,
+      createdAt: this._task?.createdAt as Date,
+      updatedAt: new Date(),
+    };
+    this.storageService.update(task);
     this.form.reset();
     this.toggleForm();
   }

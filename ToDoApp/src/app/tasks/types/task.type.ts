@@ -11,7 +11,8 @@ export type Task = {
 }
 
 export enum TaskStatus {
-  OPEN = 'OPEN',
+  PENDING = 'PENDING',
   IN_PROGRESS = 'IN_PROGRESS',
-  DONE = 'DONE'
+  DONE = 'DONE',
+  DUE = 'DUE'
 }

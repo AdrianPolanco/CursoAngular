@@ -8,6 +8,9 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CalendarModule } from 'primeng/calendar';
+import { TableModule } from 'primeng/table';
+import { TagModule } from 'primeng/tag';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 
 
@@ -22,7 +25,10 @@ import { CalendarModule } from 'primeng/calendar';
     ButtonModule,
     DialogModule,
     InputTextareaModule,
-    CalendarModule
+    CalendarModule,
+    TableModule,
+    TagModule,
+    DynamicDialogModule
   ],
 })
 export class UiModule {}
