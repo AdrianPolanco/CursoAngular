@@ -31,6 +31,15 @@
         <span class="p-column-title">Vencimiento</span>{{(task.updatedAt? task.updatedAt : task.createdAt) | date: 'dd/MM/yyyy HH:mm'}}
       </td>
       <td>
+        <select (change)="changeStatus(task, statusSelector.value)" #statusSelector>
+          <option disabled selected>Cambiar estado de la tarea</option>
+          <option value="DONE" [disabled]="'DONE' === task.status">Completada</option>
+          <option value="IN_PROGRESS" [disabled]="'IN_PROGRESS' === task.status">En progreso</option>
+          <option value="DUE" [disabled]="'DUE' === task.status">Caducada</option>
+          <option value="PENDING" [disabled]="'PENDING' === task.status">Pendiente</option>
+        </select>
+      </td>
+      <td>
         <tasks-form [task]="task" mode="edit" icon="pi pi-pencil" size="small" />
         <button pButton icon="pi pi-trash" class="p-button-rounded text-red-800" (click)="removeTask(task)"></button>
       </td>

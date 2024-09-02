@@ -12,6 +12,8 @@ export class StatusNamePipe implements PipeTransform {
         return 'Completada';
       case TaskStatus.IN_PROGRESS:
         return 'En progreso';
+      case TaskStatus.DUE:
+        return 'Vencida';
       default:
         return 'Pendiente';
     }

@@ -57,6 +57,17 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewChecked {
     })
   }
 
+  changeStatus(task: Task, status: string) {
+    if (status !== TaskStatus.DONE
+      && status !== TaskStatus.IN_PROGRESS
+      && status !== TaskStatus.PENDING
+      && status !== TaskStatus.DUE) return;
+
+    task.status = status as TaskStatus;
+
+    this.storageService.update(task);
+  }
+
   ngOnDestroy(): void {
    this.taskSubscription?.unsubscribe();
   }
