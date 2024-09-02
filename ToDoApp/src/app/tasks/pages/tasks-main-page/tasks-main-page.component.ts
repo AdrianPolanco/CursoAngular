@@ -3,19 +3,13 @@ import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'tasks-main-page',
-  templateUrl: './tasks-main-page.component.html',
-  styles: ``
+  templateUrl: './tasks-main-page.component.html'
 })
 export class TasksMainPageComponent {
   constructor(private storageService: StorageService) { }
 
   get tasks() {
-    return this.storageService.get();
+    return this.storageService.tasks$;
   }
 
-  get firstTask() {
-   return this.tasks.filter(
-     (task) => task.id === '4475fa4b-1d69-432d-86f0-e8b15071359d'
-   );
-  }
 }
