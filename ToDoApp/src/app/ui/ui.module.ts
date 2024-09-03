@@ -11,6 +11,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { CardModule } from 'primeng/card';
 
 
 
@@ -28,7 +29,8 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
     CalendarModule,
     TableModule,
     TagModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    CardModule
   ],
 })
 export class UiModule {}

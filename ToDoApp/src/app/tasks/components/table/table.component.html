@@ -1,9 +1,10 @@
-<p-table [value]="(tasks$ | async) || []" responsiveLayout="stack" [breakpoint]="'960px'" [tableStyle]="{'min-width': '50rem'}">
+<p-table [value]="(tasks$ | async) || []" responsiveLayout="stack" [breakpoint]="'960px'" [tableStyle]="{'min-width': '50rem'}"
+*ngIf="((tasks$ | async) || [])[0];else noTasksFound">
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th>Título</th>
       <th>Descripción</th>
-      <th>Status</th>
+      <th pSortableColumn="status">Status <p-sortIcon field="status" /></th>
       <th pSortableColumn="dueDate">Vencimiento <p-sortIcon field="dueDate"/></th>
       <th pSortableColumn="createdAt">Creación  <p-sortIcon field="createdAt"/></th>
       <th>Actualización</th>
@@ -46,3 +47,13 @@
     </tr>
   </ng-template>
 </p-table>
+<ng-template #noTasksFound>
+  <section class="flex justify-center items-center">
+    <p-card header="No se encontraron tareas">
+      <p class="m-0">
+        No tienes ninguna tarea registrada.
+      </p>
+    </p-card>
+  </section>
+
+</ng-template>
